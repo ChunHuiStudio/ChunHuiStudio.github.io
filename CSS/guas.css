@@ -1,0 +1,56 @@
+.gua1 {
+    font-family: STXihei,楷体;
+    font-size: 25px;
+    height: 47px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    line-height: 37px;
+    letter-spacing: 5px;
+    background-size: 400%;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.gua2 {
+    font-family: STXihei,楷体;
+    font-weight: bold;
+    font-size: 37px;
+    height: 42px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    line-height: 42px;
+    letter-spacing: 3px;
+    background-size: 400%;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.gua0 {
+    font-family: STXihei,楷体;
+    font-size: 25px;
+    height: 37px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    line-height: 37px;
+    letter-spacing: 3px;
+    background-size: 400%;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.gua-1 {
+    font-family: STXihei,楷体;
+    font-size: 13px;
+    height: 17px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    line-height: 17px;
+    letter-spacing: 1px;
+    background-size: 400%;
+    border-radius: 20px;
+    z-index: 1;
+}
