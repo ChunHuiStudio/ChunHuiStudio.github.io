@@ -1,10 +1,11 @@
+#define GetValue 0
 #include <string>
 #include <iostream>
 #include <sstream>
 using namespace std;
 class BigNumber {
-    string _numberString;
 public:
+    string _numberString;
     constexpr BigNumber(string number);
     BigNumber(long long number);
     constexpr BigNumber add(BigNumber other);
@@ -24,9 +25,8 @@ public:
     constexpr BigNumber& operator+=(const BigNumber &other);
     constexpr unsigned int operator[](int index);
 };
-constexpr BigNumber powH(BigNumber,unsigned long long,BigNumber p = 1);
-constexpr BigNumber::BigNumber(string number) : _numberString(number){}
-BigNumber::BigNumber(long long number) : _numberString(to_string(number)){}
+constexpr BigNumber::BigNumber(string number) : _numberString(number.c_str()){}
+BigNumber::BigNumber(long long number) : _numberString(to_string(number).c_str()){}
 constexpr BigNumber BigNumber::add(BigNumber other) {
     BigNumber b1 = other > *this ? other : *this;
     BigNumber b2 = other > *this ? *this : other;
@@ -165,17 +165,17 @@ constexpr BigNumber BigNumber::multiply(BigNumber other) {
     b.setString(b._numberString.erase(0, b._numberString.find_first_not_of('0')));
     return b;
 }
-constexpr BigNumber BigNumber::pow(unsigned long long exponent) {
-    if (exponent == 0) return BigNumber("1");
-    if (exponent == 1) return *this;
-    return powH(*this,exponent);
-}
-constexpr BigNumber powH(BigNumber base,unsigned long long exp,BigNumber powar) {
+constexpr BigNumber powH(BigNumber base,unsigned long long exp,BigNumber powar = BigNumber("1")) {
     if (exp == 1) return base.multiply(powar);
     if (exp % 2 == 0)
         return powH(base.multiply(base),exp>>1,powar);
     else
         return powH(base,exp-1,powar.multiply(base));
+}
+constexpr BigNumber BigNumber::pow(unsigned long long exponent) {
+    if (exponent == 0) return BigNumber("1");
+    if (exponent == 1) return *this;
+    return powH(*this,exponent);
 }
 constexpr string BigNumber::getString() {
     return this->_numberString;
@@ -236,12 +236,33 @@ constexpr BigNumber& BigNumber::operator+=(const BigNumber &other) {
     *this = this->add(other);
     return *this;
 }
+constexpr BigNumber pow(unsigned long long exp) {
+    if (exp ==     0) return BigNumber("2").pow(    0);
+    if (exp ==     1) return BigNumber("2").pow(    1);
+    if (exp ==     2) return BigNumber("2").pow(    2);
+    if (exp ==     4) return BigNumber("2").pow(    4);
+    if (exp ==     8) return BigNumber("2").pow(    8);
+    if (exp ==    16) return BigNumber("2").pow(   16);
+    if (exp ==    32) return BigNumber("2").pow(   32);
+    if (exp ==    64) return BigNumber("2").pow(   64);
+    if (exp ==   128) return BigNumber("2").pow(  128);
+    if (exp ==   256) return BigNumber("2").pow(  256);
+    if (exp ==   512) return BigNumber("2").pow(  512);
+    if (exp ==  1024) return BigNumber("2").pow( 1024);
+    if (exp ==  2048) return BigNumber("2").pow( 2048);
+    if (exp ==  4096) return BigNumber("2").pow( 4096);
+    if (exp ==  8192) return BigNumber("2").pow( 8192);
+    if (exp == 16384) return BigNumber("2").pow(16384);
+    if (exp == 32768) return BigNumber("2").pow(32768);
+    if (exp == 65536) return BigNumber("2").pow(65536);
+    return BigNumber("2").pow(exp);
+}
 int main(int argc,char const *argv[]) {
-    unsigned long long n = 0;
+    unsigned long long n;
     if (argc <= 1)
         cin >> n;
     else
         n = stoull(argv[1]);
-    BigNumber a("2");
-    cout << (a.pow(n)).getString() << endl;
+    constexpr BigNumber end = pow(GetValue);
+    cout << end._numberString << endl;
 }
